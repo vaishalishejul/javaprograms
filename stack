@@ -1,0 +1,69 @@
+public class CustomStack {
+    private Node top;
+    private int size;
+
+    private static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public CustomStack() {
+        this.top = null;
+        this.size = 0;
+    }
+
+    public void push(int value) {
+        Node newNode = new Node(value);
+        if (top == null) {
+            top = newNode;
+        } else {
+            newNode.next = top;
+            top = newNode;
+        }
+        size++;
+    }
+
+    public int pop() {
+        if (isEmpty()) {
+            return -1; // Stack underflow, return a default value or throw an exception
+        }
+        int poppedValue = top.data;
+        top = top.next;
+        size--;
+        return poppedValue;
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            return -1; // Stack is empty, return a default value or throw an exception
+        }
+        return top.data;
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public static void main(String[] args) {
+        CustomStack stack = new CustomStack();
+
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        System.out.println("Stack size: " + stack.getSize());
+        System.out.println("Top element: " + stack.peek());
+
+        System.out.println("Popped element: " + stack.pop());
+        System.out.println("Stack size after pop: " + stack.getSize());
+    }
+}
